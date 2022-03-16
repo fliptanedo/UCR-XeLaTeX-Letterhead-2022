@@ -1,0 +1,68 @@
+%!TEX program = xelatex 
+%% See bottom of this file for comments	
+\documentclass[12pt]{article}
+\input{FlipLetterHeader} 	% May 2021 style; see bottom of this page for notes
+\input{FlipLetter_Packages}	% Flip's additional macros
+
+\begin{document}
+
+%% Usage notes at the bottom of this document.
+\SetWatermarkText{{\includegraphics[width=\paperwidth]{ucr_seal_gray.pdf}}} 
+\thispagestyle{flipsfirstpage} 	% fancy header for 1st apge
+\vspace*{.25in}
+\today
+
+% University That Hires My Students
+
+\bigskip  
+
+Dear Colleague, \par \bigskip 
+
+% \section*{section}
+
+I am happy to support \textbf{NAME} for ...
+I am an assistant professor at \UCRiverside and have known NAME for...
+%
+\lipsum[1-2]
+
+\section{Research}
+
+\lipsum[1-4]
+
+\vspace{1cm}
+\hspace{.5\textwidth}
+\begin{minipage}[]{5in}
+Sincerely, \par \medskip
+
+
+% \includegraphics[height=3\baselineskip]{FlipSignature.pdf} \par
+\includegraphics[height=3\baselineskip]{GenericSignature.pdf} \par
+% Flip Tanedo \par
+Generic Person\par
+Assistant Professor\par
+UCR Physics \& Astronomy
+\end{minipage}
+
+%% END DOCUMENT FORMATTING
+\ThisLLCornerWallPaper{1}{footerbgshort} % using wallpaper
+\end{document} 
+
+
+%% FLIP'S LETTER TEMPLATE USAGE NOTES
+%%
+%% Sublime Text: rename delete_before_string.sublime_build to .sublime_build
+%% Note .sublime_build will then be hidden from default view in macos finder
+
+%% OPTIONS: see FlipLetterHeader.tex
+
+%% 	1st page watermark
+%   \SetWatermarkText{\includegraphics{ucr_seal_gray.pdf}} %% Flip's pref.
+% 	\SetWatermarkText{\includegraphics{ucr_seal_yellow.pdf}} %% UCR official
+%%		The first option (default) is unofficial, but classier (gray)
+%%		The second option is the official guidance, but ugly (yellow)
+
+%% SPECIAL THANKS TO KEITH MIYAKE 
+%%	... used Inkscape to shrink vector images
+%%		(somehow Affinity Designer produced huge vector graphics files)
+%% Keith's Pandoc/LuaLaTeX version: 
+%%	https://gitlab.com/kaymmm/UCR-Pandoc-Letterhead/
