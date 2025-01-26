@@ -1,4 +1,5 @@
 %!TEX program = xelatex 
+% Sublime/LaTeX Tools: LaTeX-Traditional Builder
 %% See bottom of this file for comments	
 \documentclass[12pt]{article}
 \input{FlipLetterHeader} 	% May 2021 style; see bottom of this page for notes
@@ -6,28 +7,32 @@
 
 \begin{document}
 
+
 %% Usage notes at the bottom of this document.
 \SetWatermarkText{{\includegraphics[width=\paperwidth]{ucr_seal_gray.pdf}}} 
 \thispagestyle{flipsfirstpage} 	% fancy header for 1st apge
 \vspace*{.25in}
 \today
-
-% University That Hires My Students
+% \\ University That Hires My Students
+% \\ \YOU
 
 \bigskip  
 
-Dear Colleague, \par \bigskip 
+Dear Search Committee, \par \bigskip 
 
-% \section*{section}
+I am happy to recommend \textbf{PERSON}'s application 
 
-I am happy to support \textbf{NAME} for ...
-I am an assistant professor at \UCRiverside and have known NAME for...
-%
-\lipsum[1-2]
+I am an associate professor in the Department of Physics \& Astronomy at the University of California, Riverside. 
 
-\section{Research}
-
+\section*{Research}
 \lipsum[1-4]
+
+
+\section*{Summary}
+
+\lipsum[1]
+
+
 
 \vspace{1cm}
 \hspace{.5\textwidth}
@@ -35,12 +40,12 @@ I am an assistant professor at \UCRiverside and have known NAME for...
 Sincerely, \par \medskip
 
 
-% \includegraphics[height=3\baselineskip]{FlipSignature.pdf} \par
-\includegraphics[height=3\baselineskip]{GenericSignature.pdf} \par
-% Flip Tanedo \par
-Generic Person\par
-Assistant Professor\par
-UCR Physics \& Astronomy
+\includegraphics[height=3\baselineskip]{FlipSignature.pdf} \par
+% \includegraphics[height=3\baselineskip]{GenericSignature.pdf} \par
+Flip Tanedo, \; % \par
+% Generic Person\par
+Associate Professor \par
+\acro{UCR} Physics \& Astronomy
 \end{minipage}
 
 %% END DOCUMENT FORMATTING
@@ -49,9 +54,7 @@ UCR Physics \& Astronomy
 
 
 %% FLIP'S LETTER TEMPLATE USAGE NOTES
-%%
-%% Sublime Text: rename delete_before_string.sublime_build to .sublime_build
-%% Note .sublime_build will then be hidden from default view in macos finder
+
 
 %% OPTIONS: see FlipLetterHeader.tex
 
