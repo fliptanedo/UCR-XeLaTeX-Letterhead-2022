@@ -1,8 +1,8 @@
 %!TEX program = xelatex 
-% Sublime/LaTeX Tools: LaTeX-Traditional Builder
+%% Sublime/LaTeX Tools: LaTeX-Traditional Builder
 %% See bottom of this file for comments	
 \documentclass[12pt]{article}
-\input{FlipLetterHeader} 	% May 2021 style; see bottom of this page for notes
+\input{FlipLetterHeader} 	% May 2021 style
 \input{FlipLetter_Packages}	% Flip's additional macros
 
 \begin{document}
@@ -24,13 +24,21 @@ I am happy to recommend \textbf{PERSON}'s application
 
 I am an associate professor in the Department of Physics \& Astronomy at the University of California, Riverside. 
 
-\section*{Research}
+\section{Research}
 \lipsum[1-4]
 
 
-\section*{Summary}
+\section{Summary}
 
 \lipsum[1]
+\begingroup
+  \renewcommand\thefootnote{}\footnote{%
+  This recommendation represents my personal perspective and does not represent the viewpoints of UC Riverside or the University of California system. This disclaimer follows the University of California Academic Personnel Manual-036 revision in 2025 per California bill AB~1905.
+  }%
+  \addtocounter{footnote}{-1}%
+\endgroup
+%% https://www.ucop.edu/academic-personnel-programs/academic-personnel-policy/policies-under-review/apm-036.html
+%% https://tex.stackexchange.com/a/30726/8094
 
 
 
@@ -47,6 +55,9 @@ Flip Tanedo, \; % \par
 Associate Professor \par
 \acro{UCR} Physics \& Astronomy
 \end{minipage}
+
+
+
 
 %% END DOCUMENT FORMATTING
 \ThisLLCornerWallPaper{1}{footerbgshort} % using wallpaper

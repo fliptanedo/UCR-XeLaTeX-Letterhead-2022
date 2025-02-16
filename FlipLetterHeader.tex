@@ -28,9 +28,17 @@
 
 % SECTION STYLING
 \usepackage{sectsty} % simpler than titlesec
+%% n.b. causes annoying warnings
+%%      for underbar, underline
 \sectionfont{\Large \UCRriftsec \color{UCRnavy}}
 \paragraphfont{\UCRFira} % May want to weak this with color
 \setcounter{secnumdepth}{0} 
+
+% REMOVE SECTION NUMBERS
+\makeatletter
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
 
 % XELATEX
 % Rift font: https://www.dafontfree.io/download/rift/
