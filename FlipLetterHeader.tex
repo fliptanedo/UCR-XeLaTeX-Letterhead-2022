@@ -16,22 +16,85 @@
   footskip=.75in
   ]{geometry}
 
-\usepackage{wallpaper} % for 1st page footer tex.stackexchange: 42073
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% GOLD FOOTER ON LAST PAGE %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Old method: throws tagging error
+% \usepackage{wallpaper} 
+% https://tex.stackexchange.com/a/42101/8094
+% tex.stackexchange: 42073
+
+%% TIKZ ALTERNATIVE, ADA COMPLIANT
+\usepackage{tikz}
+\definecolor{footerorange}{RGB}{241, 169, 33}
+
+\newcommand{\PlaceLastPageFooter}{%
+  \begin{tikzpicture}[remember picture, overlay]
+    % UA-2 Artifact ("not a figure") tagging
+    \tagstructbegin{tag=Artifact}
+      \fill[footerorange] 
+        (current page.south west) -- 
+        (current page.south east) -- 
+        % 
+        ([yshift={\paperwidth*(666.33/3856)-30}]current page.south east) -- % 3856 is the total SVG width
+        ([yshift={\paperwidth*(393.21/3856)-30}]current page.south west) --
+        cycle;
+    \tagstructend
+  \end{tikzpicture}%
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%% 1st page watermark %%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
 \usepackage[firstpage]{draftwatermark} % for 1st page watermark
   \SetWatermarkAngle{0}
-  \SetWatermarkText{{\includegraphics[width=\paperwidth]{ucr_seal_gray.pdf}}} %% Flip's pref.
-  % \SetWatermarkText{\includegraphics{ucr_seal_yellow.pdf}} %% UCR official
+  %% Flip's preferred style:
+  \SetWatermarkText{{\includegraphics[width=\paperwidth, alt={UCR seal as watermark}]{ucr_seal_gray.pdf}}} 
+  %% UCR official style (looks ugly)
+  % \SetWatermarkText{\includegraphics{ucr_seal_yellow.pdf}} 
+
 
 \usepackage{xcolor}
   \definecolor{UCRnavy}{RGB}{14,76,146} % my remix
   \definecolor{UCRblue}{RGB}{45,108,192}
 
-% SECTION STYLING
-\usepackage{sectsty} % simpler than titlesec
-%% n.b. causes annoying warnings
-%%      for underbar, underline
-\sectionfont{\Large \UCRriftsec \color{UCRnavy}}
-\paragraphfont{\UCRFira} % May want to weak this with color
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLES AND PARAGRAPH STYLE %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % SECTION STYLING: OLD
+% \usepackage{sectsty} % simpler than titlesec
+% % n.b. causes annoying warnings
+% %      for underbar, underline
+% \sectionfont{\Large \UCRriftsec \color{UCRnavy}}
+% \paragraphfont{\UCRFira} % May want to tweak this with color
+
+%% ADA compliant way
+%% NEW: TITLESEC INSTEAD OF SECSTY
+\usepackage{titlesec} 
+% Replaces: \sectionfont{\Large \UCRriftsec \color{UCRnavy}}
+\titleformat{\section}
+  {\Large\UCRriftsec\color{UCRnavy}\bfseries} % Format (Size, Font, Color) 
+  {}                                % Label (Empty because numbering is 0) 
+  {0pt}                             % Sep
+  {}                                % Before-code
+
+% Replaces: \paragraphfont{\UCRFira}
+\titleformat{\paragraph}[runin]    % runin keeps text on the same line
+  {\UCRFira\bfseries}               % Format 
+  {}                                % Label
+  {0pt}                             % Sep
+  {}                                % Before-code
+
+
+
+
+
+
 \setcounter{secnumdepth}{0} 
 
 % REMOVE SECTION NUMBERS
@@ -40,18 +103,22 @@
 \makeatother
 
 
-% XELATEX
+% XELATEX and FONTS
 % Rift font: https://www.dafontfree.io/download/rift/
 \usepackage[no-math]{fontspec}
   \newfontfamily\UCRriftsec[
     Ligatures=TeX, 
     LetterSpace=10.0, 
-    UprightFont={* Medium}]{Rift}
+    UprightFont={* Medium},
+    BoldFont={* Bold}
+    ]{Rift}
   \newfontfamily\UCRrift[
     Ligatures=TeX, 
     LetterSpace=15.0, 
     UprightFont={* Medium}, 
-    SizeFeatures={Size=10}]{Rift}
+    BoldFont={* Bold},
+    SizeFeatures={Size=10}
+    ]{Rift}
   \newfontfamily\UCRFiraBold[
     Ligatures=TeX, 
     UprightFont={* Bold}%, 
@@ -66,6 +133,16 @@
   % \setmainfont{EB Garamond} % problems with boldface
 
 
+% Helvetica Neue Thin definition
+\newfontfamily\lightfont{Helvetica Neue}[
+    Ligatures=TeX,
+    UprightFont={* Thin},  % Directly calls the 'Thin' font face
+    LetterSpace=10.0,      % Increased from Rift's 10-15 range for more "air"
+    WordSpace=1.1          % Adds extra breathing room between words
+]
+
+
+
 
 %% ADVANCED
 %% Using zref; tex.stackexchange.com/questions/191472/
@@ -75,6 +152,22 @@
 %   \ifnum\value{page}=\ztotpages
 %   \else\large \textbf{GO ON TO NEXT PAGE}
 %   \fi}
+
+
+
+%% ADA compliance
+% \tagpdfsetup{add-new-tag=Artifact/P} % Helps categorize background filler
+
+% \ExplSyntaxOn
+% \newcommand{\ArtifactWallpaper}[2]{
+%   \tag_mc_begin:n {artifact} % Start marking as artifact
+%     \ThisLLCornerWallPaper{#1}{#2}
+%   \tag_mc_end: % End marking
+% }
+% \ExplSyntaxOff
+
+
+
 
 %%%%%%%%%%%%%%
 %%  HEADER  %%
@@ -103,7 +196,10 @@
   
   \fancyhead[L]{%
         \hspace{-.2in}
-        \includegraphics[width=2.5in]{ucrlogo}%\\
+        \includegraphics[
+          width=2.5in,
+          alt={UCR logo}
+          ]{ucrlogo}%\\
   %     {\UCRsans \textcolor{white}{.}\\\textcolor{white}{.}}%
         }%
   

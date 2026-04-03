@@ -1,15 +1,33 @@
-%!TEX program = xelatex 
-%% Sublime/LaTeX Tools: LaTeX-Traditional Builder
+%%!TEX program = lualatex
+
+%% Can comment out for drafts:
+\DocumentMetadata{ % for ADA compliance
+  lang        = en-US,
+  pdfstandard = ua-2,
+  % pdfstandard = a-4f, % breaks hypersetup metadata
+  tagging=on,
+  tagging-setup={math/setup=mathml-SE}
+}
+
 %% See bottom of this file for comments	
 \documentclass[12pt]{article}
 \input{FlipLetterHeader} 	% May 2021 style
 \input{FlipLetter_Packages}	% Flip's additional macros
 
+\hypersetup{
+    pdftitle={},
+    pdfsubject={},
+    pdfauthor={Flip Tanedo},
+    pdfkeywords={},
+}
+
+\newcommand{\lightfontsmall}{\fontsize{9.5pt}{10pt}\selectfont\lightfont}
+
 \begin{document}
 
 
 %% Usage notes at the bottom of this document.
-\SetWatermarkText{{\includegraphics[width=\paperwidth]{ucr_seal_gray.pdf}}} 
+\SetWatermarkText{{\includegraphics[width=\paperwidth, alt={UCR seal watermark}]{ucr_seal_gray.pdf}}} 
 \thispagestyle{flipsfirstpage} 	% fancy header for 1st apge
 \vspace*{.25in}
 \today
@@ -25,15 +43,33 @@ I am happy to recommend \textbf{PERSON}'s application
 I am an associate professor in the Department of Physics \& Astronomy at the University of California, Riverside. 
 
 \section{Research}
-\lipsum[1-4]
+\paragraph{example} 
+Some notes here.
+\vspace{1em}
+\begin{quote}
+% \lightfont\small
+\lightfontsmall
+  Some specific quote in a sans serif font.
+\end{quote}
+\vspace{1em}
 
+\paragraph{example 2}
+Some notes here. 
+% \hl{Key point.} Other notes.
+\highLight{Key point.} Other notes.
 
 \section{Summary}
+In summary,
+\begin{enumerate}
+  \item A summary of honors.
+\end{enumerate}
 
-\lipsum[1]
 \begingroup
   \renewcommand\thefootnote{}\footnote{%
-  This recommendation represents my personal perspective and does not represent the viewpoints of UC Riverside or the University of California system. This disclaimer follows the University of California Academic Personnel Manual-036 revision in 2025 per California bill AB~1905.
+  % \par %% if there are footnotes on this page
+  \lightfont
+  \textcolor{gray}{%
+  This recommendation represents my personal perspective and does not represent the viewpoints of UC Riverside or the University of California system. This disclaimer follows the University of California Academic Personnel Manual-036 revision in 2025 per California bill AB~1905.}
   }%
   \addtocounter{footnote}{-1}%
 \endgroup
@@ -48,7 +84,10 @@ I am an associate professor in the Department of Physics \& Astronomy at the Uni
 Sincerely, \par \medskip
 
 
-\includegraphics[height=3\baselineskip]{FlipSignature.pdf} \par
+\includegraphics[
+  height=3\baselineskip,
+  alt={Flip Tanedo signature}
+  ]{FlipSignature.pdf} \par
 % \includegraphics[height=3\baselineskip]{GenericSignature.pdf} \par
 Flip Tanedo, \; % \par
 % Generic Person\par
@@ -60,7 +99,9 @@ Associate Professor \par
 
 
 %% END DOCUMENT FORMATTING
-\ThisLLCornerWallPaper{1}{footerbgshort} % using wallpaper
+% \ThisLLCornerWallPaper{1}{footerbgshort} % OLD using wallpaper
+\PlaceLastPageFooter % doesn't cause ADA warning
+%% ... but this one might have a slightly off angle
 \end{document} 
 
 
